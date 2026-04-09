@@ -57,3 +57,4 @@ if __name__ == "__main__":
     cfg = load_config()
     print(f"Bankroll:       ${cfg.total_bankroll}")
     print(f"Min margin:     {cfg.min_profit_margin * 100}%")
+    print(f"Autofire:       {cfg.autofire_enabled}")
