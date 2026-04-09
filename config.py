@@ -15,18 +15,18 @@ class Config:
     scrape_interval_seconds: int = 30
     headless: bool = True
     use_stealth: bool = True
-    requrest_timeout_ms: int = 15000
+    request_timeout_ms: int = 15000
     min_action_delay_ms: int = 800
     max_action_delay_ms: int = 2500
     min_profit_margin: float = 0.01
-    max_profit_margin: float = 10000.0
-    max_strake_per_leg: float = 500.0
+    total_bankroll: float = 10000.0
+    max_stake_per_leg: float = 500.0
     discord_webhook_url: str | None = None
     alert_cooldown_seconds: int = 300
-    autofire_enables: bool = False
+    autofire_enabled: bool = False
     autofire_confirm_threshold: float = 0.02
     dashboard_host: str = "0.0.0.0"
-    dashbord_port: int = 8000
+    dashboard_port: int = 8000
     credentials: dict[str, BookCredentials] = field(default_factory = dict)
 
 def load_config() -> Config:
@@ -38,7 +38,7 @@ def load_config() -> Config:
             credentials[book] = BookCredentials(username=user, password=pw)
 
     return Config(
-        scrape_interval_seconds = int(os.getenv("SCRAOE_INTERVAL_SECONDS",30)),
+        scrape_interval_seconds = int(os.getenv("SCRAPE_INTERVAL_SECONDS",30)),
         headless=os.getenv("HEADLESS","true").lower() == "true",
         use_stealth=os.getenv("USE_STEALTH","true").lower() == "true",
         min_profit_margin=float(os.getenv("MIN_PROFIT_MARGIN", 0.01)),
@@ -52,3 +52,8 @@ def load_config() -> Config:
         dashboard_port=int(os.getenv("DASHBOARD_PORT", 8000)),
         credentials=credentials,
     )
+
+if __name__ == "__main__":
+    cfg = load_config()
+    print(f"Bankroll:       ${cfg.total_bankroll}")
+    print(f"Min margin:     {cfg.min_profit_margin * 100}%")
