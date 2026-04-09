@@ -28,5 +28,27 @@ class Config:
     dashboard_host: str = "0.0.0.0"
     dashbord_port: int = 8000
     credentials: dict[str, BookCredentials] = field(default_factory = dict)
-    
 
+def load_config() -> Config:
+    credentials = {}
+    for book in ["draftkings","fanduel","betmgm","caesars"]:
+        user = os.getenv(f"{book.upper()}_USERNAME","")
+        pw = os.getenv(f"{book.upper()}_PASSWORD","")
+        if user and pw:
+            credentials[book] = BookCredentials(username=user, password=pw)
+
+    return Config(
+        scrape_interval_seconds = int(os.getenv("SCRAOE_INTERVAL_SECONDS",30)),
+        headless=os.getenv("HEADLESS","true").lower() == "true",
+        use_stealth=os.getenv("USE_STEALTH","true").lower() == "true",
+        min_profit_margin=float(os.getenv("MIN_PROFIT_MARGIN", 0.01)),
+        total_bankroll=float(os.getenv("TOTAL_BANKROLL", 10000)),
+        max_stake_per_leg=float(os.getenv("MAX_STAKE_PER_LEG", 500)),
+        discord_webhook_url=os.getenv("DISCORD_WEBHOOK_URL"),
+        alert_cooldown_seconds=int(os.getenv("ALERT_COOLDOWN_SECONDS", 300)),
+        autofire_enabled=os.getenv("AUTOFIRE_ENABLED", "false").lower() == "true",
+        autofire_confirm_threshold=float(os.getenv("AUTOFIRE_CONFIRM_THRESHOLD", 0.02)),
+        dashboard_host=os.getenv("DASHBOARD_HOST", "0.0.0.0"),
+        dashboard_port=int(os.getenv("DASHBOARD_PORT", 8000)),
+        credentials=credentials,
+    )

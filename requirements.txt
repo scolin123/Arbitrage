@@ -16,7 +16,6 @@ rapidfuzz==3.9.3
 
 # Config / env
 python-dotenv==1.0.1
-pydantic==2.7.1
 
 # Math helpers
 numpy==1.26.4
