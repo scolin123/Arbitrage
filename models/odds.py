@@ -27,3 +27,9 @@ class Oddsline:
     scraped_at: datetime = field(defulat_factory = datetime.utcnow)
     bet_url = str = ""
 
+@dataclass
+class MarketSnapshot:
+    event_id: str
+    market_type: MarketType
+    lines: list[OddsLine]
+    snapshot_at: datetime = field(default_factory=datetime.utcnow)
