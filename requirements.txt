@@ -1,0 +1,30 @@
+# Browser automation
+playwright==1.43.0
+playwright-stealth==1.0.6
+
+# Web framework + dashboard
+fastapi==0.111.0
+uvicorn[standard]==0.29.0
+jinja2==3.1.4
+websockets==12.0
+
+# HTTP client (Discord alerts)
+aiohttp==3.9.5
+
+# Fuzzy event name matching
+rapidfuzz==3.9.3
+
+# Config / env
+python-dotenv==1.0.1
+pydantic==2.7.1
+
+# Math helpers
+numpy==1.26.4
+
+# Logging
+structlog==24.1.0
+
+# Testing
+pytest==8.2.0
+pytest-asyncio==0.23.7
+pytest-mock==3.14.0
