@@ -9,7 +9,7 @@ jinja2==3.1.4
 websockets==12.0
 
 # HTTP client (Discord alerts)
-aiohttp==3.9.5
+httpx==0.27.0
 
 # Fuzzy event name matching
 rapidfuzz==3.9.3
